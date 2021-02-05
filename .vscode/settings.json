@@ -56,7 +56,7 @@
         "thread": "cpp",
         "chrono": "cpp"
     },
-    "noteSync.enableNoteSync": true,
+    "noteSync.enableNoteSync": false,
     "noteSync.delayTime": 100,
     "git.enableSmartCommit": true
 }
