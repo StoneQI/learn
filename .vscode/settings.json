@@ -54,5 +54,7 @@
     },
     "files.associations": {
         "thread": "cpp"
-    }
+    },
+    "noteSync.enableNoteSync": true,
+    "noteSync.delayTime": 100
 }
