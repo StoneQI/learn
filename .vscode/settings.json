@@ -53,7 +53,8 @@
         "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
     },
     "files.associations": {
-        "thread": "cpp"
+        "thread": "cpp",
+        "chrono": "cpp"
     },
     "noteSync.enableNoteSync": true,
     "noteSync.delayTime": 100
