@@ -57,6 +57,5 @@
         "chrono": "cpp"
     },
     "noteSync.enableNoteSync": true,
-    "noteSync.delayTime": 100,
-    "git.enableSmartCommit": true
+    "noteSync.delayTime": 100
 }
