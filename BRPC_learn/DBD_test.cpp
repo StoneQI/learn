@@ -67,7 +67,7 @@ int main() {
                 auto end   = std::chrono::high_resolution_clock::now();
                 auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);
                 mtx.lock();
-                std::cout <<  "读花费了"  
+                std::cout <<  "读花费了"  <<
                     double(duration.count()) << "ns"<< std::endl;
                 mtx.unlock();
                 std::this_thread::sleep_for(std::chrono::microseconds(rand()%190));
