@@ -18,6 +18,10 @@
 
 // MSCV 2017 __cplusplus definition by default does not track the C++ version.
 // https://devblogs.microsoft.com/cppblog/msvc-now-correctly-reports-__cplusplus/
+
+//  c++0x引入了static_assert关键字，用来实现编译期间的断言，叫静态断言。
+// 语法：static_assert（常量表达式，要提示的字符串）；
+
 #if !defined(_MSC_VER) || _MSC_VER >= 2000
 static_assert(__cplusplus >= 201402L, "__cplusplus >= 201402L");
 #endif
