@@ -23,7 +23,7 @@
 #endif
 
 //  Likeliness annotations
-//
+//  允许程序员将最有可能执行的分支告诉编译器
 //  Useful when the author has better knowledge than the compiler of whether
 //  the branch condition is overwhelmingly likely to take a specific value.
 //
