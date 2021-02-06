@@ -15,6 +15,7 @@
  */
 
 /**
+ * 编译器属性兼容性检测
  * GCC compatible wrappers around clang attributes.
  *
  * @author Dominik Gabi
