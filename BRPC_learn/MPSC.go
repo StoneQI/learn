@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:30:18
+ * @LastEditTime: 2021-02-08 11:30:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -117,6 +117,7 @@ func (ex *ExecutionQueue) moreTasks(oldNode *TaskNode) bool {
 
 		if p == oldNode {
 			oldNode.Next = tail
+			ex.jsonVis = ex.toString()
 			return true
 		}
 	}
