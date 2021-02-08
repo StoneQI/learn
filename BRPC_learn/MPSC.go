@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:38:04
+ * @LastEditTime: 2021-02-08 11:55:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -19,8 +19,8 @@ import (
 )
 
 type TaskNode struct {
-	data interface{}
-	Next *TaskNode
+	data interface{} `json:"data"`
+	Next *TaskNode   `json:"Next"`
 }
 
 var UNCONNECTED *TaskNode = new(TaskNode)
