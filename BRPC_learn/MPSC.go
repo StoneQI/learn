@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:58:11
+ * @LastEditTime: 2021-02-08 11:58:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -63,7 +63,7 @@ func (ex *ExecutionQueue) AddTaskNode(data interface{}) {
 
 	node.Next = nil
 	// 任务不多直接执行，防止线程切换
-	ex._execute_func(node.data)
+	ex._execute_func(node.Data)
 	if !ex.moreTasks(node) {
 		// ex.pool.Put(node)
 		// atomic.StorePointer((*unsafe.Pointer)(unsafe.Pointer(&ex.Head)), nil)
@@ -132,7 +132,7 @@ func (ex *ExecutionQueue) exectueTasks(taskNode *TaskNode) {
 		taskNode = taskNode.Next
 		tmp.Next = nil
 		ex.pool.Put(tmp)
-		ex._execute_func(taskNode.data)
+		ex._execute_func(taskNode.Data)
 
 		if taskNode.Next == nil && !ex.moreTasks(taskNode) {
 			// ex.pool.Put(taskNode)
