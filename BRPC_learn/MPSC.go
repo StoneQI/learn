@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:36:10
+ * @LastEditTime: 2021-02-08 11:36:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -155,7 +155,7 @@ func Test1() {
 	var singalexit = sync.WaitGroup{}
 	ex := NewExecutionQueue(print)
 	start := time.Now()
-
+	var s string
 	for k := 0; k < 20; k++ {
 		for i := 0; i < 10000; i++ {
 			singalexit.Add(1)
@@ -164,6 +164,7 @@ func Test1() {
 				for j := 0; j < 90; j++ {
 					ex.AddTaskNode(i*100 + j)
 				}
+				s = ex.toString()
 
 			}(i, &singalexit)
 
