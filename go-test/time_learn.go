@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-08 20:32:50
- * @LastEditTime: 2021-02-08 20:33:59
+ * @LastEditTime: 2021-02-08 20:35:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/go-test/time_learn.go
@@ -17,5 +17,5 @@ import (
 func main() {
 	now := time.Now()
 
-	fmt.Println(now)
+	fmt.Println(now.Unix())
 }
