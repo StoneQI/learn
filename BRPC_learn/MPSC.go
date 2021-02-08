@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:37:38
+ * @LastEditTime: 2021-02-08 11:38:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -166,6 +166,7 @@ func Test1() {
 				}
 			}(i, &singalexit)
 			s = ex.toString()
+			_ = s
 
 		}
 	}
