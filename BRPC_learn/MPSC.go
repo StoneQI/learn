@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:57:22
+ * @LastEditTime: 2021-02-08 11:58:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -19,7 +19,7 @@ import (
 )
 
 type TaskNode struct {
-	data interface{} `json:"data"`
+	Data interface{} `json:"data"`
 	Next *TaskNode   `json:"Next"`
 }
 
@@ -27,7 +27,7 @@ var UNCONNECTED *TaskNode = new(TaskNode)
 
 func NewExecutionQueue(_func func(interface{})) *ExecutionQueue {
 	return &ExecutionQueue{
-		head:          nil,
+		Head:          nil,
 		_execute_func: _func,
 		locker:        sync.Mutex{},
 		pool: &sync.Pool{New: func() interface{} {
@@ -37,7 +37,7 @@ func NewExecutionQueue(_func func(interface{})) *ExecutionQueue {
 }
 
 type ExecutionQueue struct {
-	Head          *TaskNode         `json:"head"`
+	Head          *TaskNode         `json:"Head"`
 	_execute_func func(interface{}) `json:"-"`
 	locker        sync.Mutex        `json:"-"`
 	pool          *sync.Pool        `json:"-"`
@@ -47,13 +47,13 @@ type ExecutionQueue struct {
 func (ex *ExecutionQueue) AddTaskNode(data interface{}) {
 	node := ex.pool.Get().(*TaskNode)
 	// node := new(TaskNode)
-	node.data = data
+	node.Data = data
 	node.Next = UNCONNECTED
 
-	preHead := atomic.SwapPointer((*unsafe.Pointer)(unsafe.Pointer(&ex.head)), unsafe.Pointer(node))
+	preHead := atomic.SwapPointer((*unsafe.Pointer)(unsafe.Pointer(&ex.Head)), unsafe.Pointer(node))
 	// ex.locker.Lock()
-	// preHead := ex.head
-	// ex.head = node
+	// preHead := ex.Head
+	// ex.Head = node
 	// ex.locker.Unlock()
 
 	if preHead != nil {
@@ -66,7 +66,7 @@ func (ex *ExecutionQueue) AddTaskNode(data interface{}) {
 	ex._execute_func(node.data)
 	if !ex.moreTasks(node) {
 		// ex.pool.Put(node)
-		// atomic.StorePointer((*unsafe.Pointer)(unsafe.Pointer(&ex.head)), nil)
+		// atomic.StorePointer((*unsafe.Pointer)(unsafe.Pointer(&ex.Head)), nil)
 		return
 	}
 	go ex.exectueTasks(node)
@@ -82,19 +82,19 @@ func (ex *ExecutionQueue) moreTasks(oldNode *TaskNode) bool {
 
 	newHead := oldNode
 
-	if atomic.CompareAndSwapPointer((*unsafe.Pointer)(unsafe.Pointer(&ex.head)), unsafe.Pointer(newHead), nil) {
+	if atomic.CompareAndSwapPointer((*unsafe.Pointer)(unsafe.Pointer(&ex.Head)), unsafe.Pointer(newHead), nil) {
 		return false
 	}
-	newHead = (*TaskNode)(atomic.LoadPointer((*unsafe.Pointer)(unsafe.Pointer(&ex.head))))
+	newHead = (*TaskNode)(atomic.LoadPointer((*unsafe.Pointer)(unsafe.Pointer(&ex.Head))))
 
 	// ex.locker.Lock()
-	// if ex.head == newHead {
-	// 	ex.head = nil
+	// if ex.Head == newHead {
+	// 	ex.Head = nil
 	// 	ex.locker.Unlock()
 	// 	return false
 	// } else {
 	// 	// 有新插入值
-	// 	newHead = ex.head
+	// 	newHead = ex.Head
 	// }
 	// ex.locker.Unlock()
 
@@ -136,7 +136,7 @@ func (ex *ExecutionQueue) exectueTasks(taskNode *TaskNode) {
 
 		if taskNode.Next == nil && !ex.moreTasks(taskNode) {
 			// ex.pool.Put(taskNode)
-			// atomic.StorePointer((*unsafe.Pointer)(unsafe.Pointer(&ex.head)), nil)
+			// atomic.StorePointer((*unsafe.Pointer)(unsafe.Pointer(&ex.Head)), nil)
 			return
 		}
 	}
