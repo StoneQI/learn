@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:30:48
+ * @LastEditTime: 2021-02-08 11:36:10
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -41,7 +41,7 @@ type ExecutionQueue struct {
 	_execute_func func(interface{}) `json:"_execute_func"`
 	locker        sync.Mutex        `json:"locker"`
 	pool          *sync.Pool        `json:"pool"`
-	jsonVis       string            `json:-`
+	// jsonVis       string            `json:-`
 }
 
 func (ex *ExecutionQueue) AddTaskNode(data interface{}) {
@@ -117,7 +117,7 @@ func (ex *ExecutionQueue) moreTasks(oldNode *TaskNode) bool {
 
 		if p == oldNode {
 			oldNode.Next = tail
-			ex.jsonVis = ex.toString()
+			// ex.jsonVis = ex.toString()
 			return true
 		}
 	}
