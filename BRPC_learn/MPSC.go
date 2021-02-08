@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:55:24
+ * @LastEditTime: 2021-02-08 11:57:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -37,7 +37,7 @@ func NewExecutionQueue(_func func(interface{})) *ExecutionQueue {
 }
 
 type ExecutionQueue struct {
-	head          *TaskNode         `json:"head"`
+	Head          *TaskNode         `json:"head"`
 	_execute_func func(interface{}) `json:"-"`
 	locker        sync.Mutex        `json:"-"`
 	pool          *sync.Pool        `json:"-"`
