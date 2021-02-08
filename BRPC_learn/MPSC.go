@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:22:08
+ * @LastEditTime: 2021-02-08 11:24:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -9,6 +9,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"runtime"
 	"sync"
@@ -70,6 +71,12 @@ func (ex *ExecutionQueue) AddTaskNode(data interface{}) {
 	go ex.exectueTasks(node)
 
 }
+
+func (this *ExecutionQueue) toString() string {
+	rs, _ := json.Marshal(this)
+	return string(rs)
+}
+
 func (ex *ExecutionQueue) moreTasks(oldNode *TaskNode) bool {
 
 	newHead := oldNode
