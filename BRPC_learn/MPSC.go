@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-03 19:50:48
- * @LastEditTime: 2021-02-08 11:36:45
+ * @LastEditTime: 2021-02-08 11:37:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/BRPC_learn/MPSC.go
@@ -164,9 +164,8 @@ func Test1() {
 				for j := 0; j < 90; j++ {
 					ex.AddTaskNode(i*100 + j)
 				}
-				s = ex.toString()
-
 			}(i, &singalexit)
+			s = ex.toString()
 
 		}
 	}
