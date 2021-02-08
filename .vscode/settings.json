@@ -141,5 +141,16 @@
     },
     "noteSync.enableNoteSync": true,
     "noteSync.delayTime": 10000,
-    "git.enableSmartCommit": false
+    "git.enableSmartCommit": false,
+    "go.delveConfig": {
+    "dlvLoadConfig": {
+        "followPointers": true,
+        "maxVariableRecurse": 1,
+        "maxStringLen": 5000,
+        "maxArrayValues": 64,
+        "maxStructFields": -1
+    },
+    "apiVersion": 2,
+    "showGlobalVariables": true
+}
 }
