@@ -154,5 +154,6 @@
     "showGlobalVariables": true
 },
 "jupyter.jupyterServerType": "remote",
-"python.pythonPath": "/usr/local/bin/python3"
+"python.pythonPath": "/usr/local/bin/python3",
+"jupyter.allowUnauthorizedRemoteConnection": true
 }
