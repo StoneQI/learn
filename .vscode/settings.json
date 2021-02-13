@@ -152,5 +152,7 @@
     },
     "apiVersion": 2,
     "showGlobalVariables": true
-}
+},
+"jupyter.jupyterServerType": "remote",
+"python.pythonPath": "/usr/local/bin/python3"
 }
