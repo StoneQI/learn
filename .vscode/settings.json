@@ -155,5 +155,6 @@
 },
 "jupyter.jupyterServerType": "remote",
 "python.pythonPath": "/usr/local/bin/python3",
-"jupyter.allowUnauthorizedRemoteConnection": true
+"jupyter.allowUnauthorizedRemoteConnection": true,
+"jupyter.changeDirOnImportExport": true
 }
