@@ -18,7 +18,9 @@ import (
 func main() {
 	now := time.Now()
 	var a *sync.Mutex
-	a.lock()
+	a.Lock()
+
+	a.Unlock()
 
 	fmt.Println(now)
 }
