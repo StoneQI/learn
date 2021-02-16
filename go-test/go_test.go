@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-17 00:34:35
- * @LastEditTime: 2021-02-17 00:36:50
+ * @LastEditTime: 2021-02-17 00:37:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/go-test/go_test.go
@@ -65,9 +65,8 @@ func (bb *c) say() {
 
 func setupServer(t *testing.T) *gin.Engine {
 
-	ctl := gomock.NewController(t)
-	defer ctl.Finish()
-	var templateDaoMock fpsdao.FpsTemplateDaoInterface
+	bbb := &b{aa: 12}
+	ccc := &c{aa: "123"}
 	templateDaoMock = mock.NewMockFpsTemplateDaoInterface(ctl)
 
 	templateDaoMock1 := reflect.ValueOf(&templateDaoMock).Elem()
