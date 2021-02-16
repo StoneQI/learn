@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-17 00:34:35
- * @LastEditTime: 2021-02-17 00:34:56
+ * @LastEditTime: 2021-02-17 00:36:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/go-test/go_test.go
@@ -41,6 +41,17 @@ type rtype struct {
 	gcdata    *byte // garbage collection data
 	str       int32 // string form
 	ptrToThis int32 // type for pointer to this type, may be zero
+}
+
+type a interface {
+	say()
+}
+type b struct {
+	aa int
+}
+
+func (*b) say() {
+
 }
 
 func setupServer(t *testing.T) *gin.Engine {
