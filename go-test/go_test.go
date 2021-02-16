@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-17 00:34:35
- * @LastEditTime: 2021-02-17 00:36:00
+ * @LastEditTime: 2021-02-17 00:36:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/go-test/go_test.go
@@ -9,6 +9,7 @@
 package main
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 	"unsafe"
@@ -50,8 +51,8 @@ type b struct {
 	aa int
 }
 
-func (*b) say() {
-
+func (bb *b) say() {
+	fmt.Println(bb.aa)
 }
 
 func setupServer(t *testing.T) *gin.Engine {
