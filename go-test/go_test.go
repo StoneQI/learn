@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-17 00:34:35
- * @LastEditTime: 2021-02-17 00:36:31
+ * @LastEditTime: 2021-02-17 00:36:50
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/go-test/go_test.go
@@ -52,6 +52,14 @@ type b struct {
 }
 
 func (bb *b) say() {
+	fmt.Println(bb.aa)
+}
+
+type c struct {
+	aa string
+}
+
+func (bb *c) say() {
 	fmt.Println(bb.aa)
 }
 
