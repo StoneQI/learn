@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-17 00:34:35
- * @LastEditTime: 2021-02-17 00:38:37
+ * @LastEditTime: 2021-02-17 00:41:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/go-test/go_test.go
@@ -66,6 +66,10 @@ func main() {
 	ccc := &c{aa: "123"}
 
 	templateDaoMock1 := reflect.ValueOf(bbb).Elem()
+
+	cccc := templateDaoMock1.UnsafeAddr()
+
+	_ = cccc
 	templateDaoMock2 := (*nonEmptyInterface)(unsafe.Pointer(templateDaoMock1.UnsafeAddr()))
 
 	fpsTemplateDaoPtr := reflect.ValueOf(ccc).Elem()
