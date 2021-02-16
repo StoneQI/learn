@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-17 00:34:35
- * @LastEditTime: 2021-02-17 00:38:26
+ * @LastEditTime: 2021-02-17 00:38:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /learn/go-test/go_test.go
@@ -11,10 +11,7 @@ package main
 import (
 	"fmt"
 	"reflect"
-	"testing"
 	"unsafe"
-
-	"github.com/gin-gonic/gin"
 )
 
 type nonEmptyInterface struct {
@@ -63,7 +60,7 @@ func (bb *c) say() {
 	fmt.Println(bb.aa)
 }
 
-func setupServer(t *testing.T) *gin.Engine {
+func main() {
 
 	bbb := &b{aa: 12}
 	ccc := &c{aa: "123"}
