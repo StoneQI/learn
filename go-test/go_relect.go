@@ -24,6 +24,10 @@ func assembleJump(f func() int) []byte { // 生成跳转到f函数所在位置�
 	}
 }
 
+func getPage(p uintptr) []byte {
+	return (*(*[0xFFFFFF]byte)(unsafe.Pointer(p & ^uintptr(syscall.Getpagesize()-1))))[:syscall.Getpagesize()]
+}
+
 func replace(orig, replacement func() int) {
 	bytes := assembleJump(replacement)
 	functionLocation := **(**uintptr)(unsafe.Pointer(&orig))
