@@ -1,6 +1,7 @@
 package main
 
 import (
+	"syscall"
 	"unsafe"
 )
 
@@ -27,6 +28,8 @@ func replace(orig, replacement func() int) {
 	bytes := assembleJump(replacement)
 	functionLocation := **(**uintptr)(unsafe.Pointer(&orig))
 	window := rawMemoryAccess(functionLocation)
+	page := getPage(functionLocation)
+	syscall.Mprotect(page, syscall.PROT_READ|syscall.PROT_WRITE|syscall.PROT_EXEC)
 
 	copy(window, bytes)
 }
