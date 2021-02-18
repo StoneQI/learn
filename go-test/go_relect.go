@@ -5,9 +5,6 @@ import (
 	"unsafe"
 )
 
-func a() int { return 1 }
-func b() int { return 2 }
-
 func rawMemoryAccess(b uintptr) []byte { // 获取b地址的内存块
 	return (*(*[0xFF]byte)(unsafe.Pointer(b)))[:] // 获取b对应的内存块，以便改写内容，从而达到替换目的
 }
@@ -37,6 +34,9 @@ func replace(orig, replacement func() int) {
 
 	copy(window, bytes)
 }
+
+func a() int { return 1 }
+func b() int { return 2 }
 
 func main() {
 	replace(a, b)
