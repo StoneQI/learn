@@ -38,7 +38,7 @@ func replace(orig, replacement func() int) {
 func a() int { return 1 }
 func b() int { return 2 }
 
-func main() {
+func main2() {
 	replace(a, b)
 	print(a())
 }
