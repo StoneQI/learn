@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 )
 
@@ -11,5 +10,5 @@ func main() {
 	123
 	`
 	result := new(map[string]interface{})
-	json.Unmarshal(,result)
+	json.Unmarshal(str.,result)
 }
