@@ -1,12 +1,15 @@
 package main
 
-import "encoding/json"
+import (
+	"bytes"
+	"encoding/json"
+)
 
 func main() {
 
 	str := `123
 	123
 	`
-	result := map[string]interface{}
-	json.Unmarshal(str,result)
+	result := new(map[string]interface{})
+	json.Unmarshal(,result)
 }
