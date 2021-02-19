@@ -10,5 +10,7 @@ func main() {
 	123
 	`
 	result := new(map[string]interface{})
-	json.Unmarshal(str.,result)
+	json.Unmarshal([]byte(str), result)
+
+	print(result)
 }
