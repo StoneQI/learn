@@ -91,6 +91,6 @@ func main() {
 	result := make(map[string]interface{})
 	json.Unmarshal([]byte(str), &result)
 
-	aa, b := result["data"].(map[string]interface{})
+	aa, b := result["data_string"].(map[string]interface{})
 	print(aa, b)
 }
