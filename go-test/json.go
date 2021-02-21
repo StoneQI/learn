@@ -146,19 +146,20 @@ func (post *PostService)GetAllPost()  {
 
 
 type Server struct{
-	
-	postService *postService
+	ln     net.Listener
+	server *http.Server
+
+	postService *PostService
 }
 
-func NewPostService(postDAO *PostDAO)  {
-	return &PostService{
+func NewServer()  {
+	return &Server{
 		postDAO: postDAO,
 	}	
 } 
 
-func (post *PostService)GetAllPost()  {
-	post.postDAO.FindPosts()
-	....
+func (server *Server)SetPostService(postDAO *PostDAO)  {
+	server.postService = postDAO
 } 
 
 
