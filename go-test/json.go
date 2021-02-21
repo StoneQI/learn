@@ -91,7 +91,18 @@ func main() {
 	`
 	result := make(map[string]interface{})
 	json.Unmarshal([]byte(str), &result)
-	aa, err := sql.Open("", 2)
+	// aa, err := sql.Open("", 2)
 	aa, b := result["data_string"].(map[string]interface{})
 	print(aa, b)
 }
+
+
+func (s P) FindPostByID(ctx context.Context, id int) (*Post, error)
+
+    FindPosts(ctx context.Context, filter PostFilter) ([]*Post, int, error)
+
+    CreatePost(ctx context.Context, post *Post) error
+
+    UpdatePost(ctx context.Context, id int, upd PostUpdate) (*Post, error)
+
+    DeletePost(ctx context.Context, id int) error
