@@ -96,13 +96,31 @@ func main() {
 	print(aa, b)
 }
 
+type PostMysql struct{
+    db *sql.DB
+}
 
-func (s P) FindPostByID(ctx context.Context, id int) (*Post, error)
+func (s *PostMysql) FindPostByID(ctx context.Context, id int) (*Post, error){
+	...
+}
 
-    FindPosts(ctx context.Context, filter PostFilter) ([]*Post, int, error)
+func (s *PostMysql)     FindPosts(ctx context.Context, filter PostFilter) ([]*Post, int, error){
+	s.db.Exec("...",...)
+}
 
-    CreatePost(ctx context.Context, post *Post) error
+func (s *PostMysql)     CreatePost(ctx context.Context, post *Post) error{
+	...
+}
 
-    UpdatePost(ctx context.Context, id int, upd PostUpdate) (*Post, error)
+func (s *PostMysql)     UpdatePost(ctx context.Context, id int, upd PostUpdate) (*Post, error){
+	...
+}
 
-    DeletePost(ctx context.Context, id int) error
+func (s *PostMysql)     DeletePost(ctx context.Context, id int) error
+{
+	...
+}
+
+type PostService struct{
+	postDAO *
+}
