@@ -100,6 +100,11 @@ type PostMysql struct{
     db *sql.DB
 }
 
+func NewPostMysql(){
+	...
+}
+
+
 func (s *PostMysql) FindPostByID(ctx context.Context, id int) (*Post, error){
 	...
 }
@@ -122,5 +127,16 @@ func (s *PostMysql)     DeletePost(ctx context.Context, id int) error
 }
 
 type PostService struct{
-	postDAO *
+	postDAO *PostDAO
 }
+
+func NewPostService(postDAO *PostDAO)  {
+	return &PostService{
+		postDAO: postDAO,
+	}	
+} 
+
+func (post *PostService)GetAllPost()  {
+	post.postDAO.FindPosts()
+	....
+} 
