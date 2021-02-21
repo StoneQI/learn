@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"encoding/json"
 )
 
@@ -95,64 +94,18 @@ func main() {
 	aa, b := result["data_string"].(map[string]interface{})
 	print(aa, b)
 }
-func setupServerPostHandler(t *testing.T) *gin.Engine {
-	
-	
-	
-	engine := gin.New()
-	//engine.Use(middleware.Logger())
-	engine.Use(gin.Recovery())
-	PostDaoMock,issql:= GetPostDao(t)
-	if !issql {
-		... mock 促使化
-		
+
+func a(a int, b int) {
+	if a > 10 {
+		b(a+10, b)
 	}
-	server := NewServer()
-	// 唯一依赖
-	server.SetPostService(PostDaoMock,RedisClient)
-	
-	engine.POST("/Post", server.GetPosts)
-	return engine
 }
 
-func TestPostHandler(t *testing.T) {
-	router := setupServerPostHandler(t)
-	Convey("Post Handler接口测试",t, func() {
-		req_content := &Post{
-			... 内容
-		}
-		type Data_resp struct {
-			Post_id int `json:Post_id`
-		}
-		type resp_json struct {
-			Data  Data_resp `json:data`
-			Err_msg  string `json:err_msg`
-			Err_no   int `json:err_no`
-		}
-
-		req_content.Type = "AddPost"
-		Convey("AddPost 测试", func() {
-
-			Convey("AddPost 测试1", func() {
-
-				req_new := req_content
-				req_string, _ := json.Marshal(req_new)
-				req := httptest.NewRequest(http.MethodPost, "/AddPost", strings.NewReader(string(req_string)))
-				req.Header[global.HEADER_TRACEID] = []string{"testTrace"}
-				req.Header[global.HEADER_SPANID] = []string{"testSpan"}
-				req.Header[global.HEADER_USER] = []string{"testUser"}
-				req.Header.Set("Content-Type","application/json")
-
-				w := httptest.NewRecorder()
-				router.ServeHTTP(w, req)
-				resp := w.Result()
-				resp_json1 := &resp_json{}
-				_ = json.Unmarshal(w.Body.Bytes(), resp_json1)
-				So(resp_json1.Data.Post_id,ShouldHaveSameTypeAs,1)
-				So(resp.StatusCode,ShouldEqual,http.StatusOK)
-			})
-		})
-	})
+func b(a int, b int) {
+	if b < 10 {
+		_ = b(a, b+10)
+	}
 }
-
-
+func c(a int, b int) int {
+	return a + b
+}
