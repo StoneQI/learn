@@ -107,35 +107,28 @@ func setupServerPostHandler(t *testing.T) *gin.Engine {
 		... mock 促使化
 		
 	}
-
 	server := NewServer()
 	// 唯一依赖
-	server.SetPostLogic(PostDaoMock)
-	// 创建组件
-	engine.POST("/Post", server.PostHandler)
-
+	server.SetPostService(PostDaoMock,RedisClient)
+	
+	engine.POST("/Post", server.GetPosts)
 	return engine
 }
 
 func TestPostHandler(t *testing.T) {
-
 	router := setupServerPostHandler(t)
 	Convey("Post Handler接口测试",t, func() {
-
 		req_content := &Post{
-
+			... 内容
 		}
-
 		type Data_resp struct {
 			Post_id int `json:Post_id`
 		}
-
 		type resp_json struct {
 			Data  Data_resp `json:data`
 			Err_msg  string `json:err_msg`
 			Err_no   int `json:err_no`
 		}
-
 
 		req_content.Type = "AddPost"
 		Convey("AddPost 测试", func() {
@@ -151,28 +144,15 @@ func TestPostHandler(t *testing.T) {
 				req.Header.Set("Content-Type","application/json")
 
 				w := httptest.NewRecorder()
-
-				//fmt.Println(req.)
-
 				router.ServeHTTP(w, req)
 				resp := w.Result()
-
-				//if resp.StatusCode == http.StatusBadRequest {
-				//	fmt.Println(w.Body.String())
-				//}
 				resp_json1 := &resp_json{}
 				_ = json.Unmarshal(w.Body.Bytes(), resp_json1)
 				So(resp_json1.Data.Post_id,ShouldHaveSameTypeAs,1)
 				So(resp.StatusCode,ShouldEqual,http.StatusOK)
 			})
-
 		})
-
-
-
-
 	})
-
 }
 
 
