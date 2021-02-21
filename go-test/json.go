@@ -90,7 +90,7 @@ func main() {
 	`
 	result := make(map[string]interface{})
 	json.Unmarshal([]byte(str), &result)
-
+	sql.Open
 	aa, b := result["data_string"].(map[string]interface{})
 	print(aa, b)
 }
