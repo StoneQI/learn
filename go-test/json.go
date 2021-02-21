@@ -145,8 +145,9 @@ func (post *PostService)GetAllPost()  {
 
 
 
-type Service struct{
-	postDAO *PostDAO
+type Server struct{
+	
+	postService *postService
 }
 
 func NewPostService(postDAO *PostDAO)  {
