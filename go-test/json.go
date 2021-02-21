@@ -95,15 +95,15 @@ func main() {
 	print(aa, b)
 }
 
-func a(a int, b int) {
+func a(a int, b int) int {
 	if a > 10 {
-		b(a+10, b)
+		return b(a+10, b)
 	}
 }
 
-func b(a int, b int) {
+func b(a int, b int) int {
 	if b < 10 {
-		_ = b(a, b+10)
+		return c(a, b+10)
 	}
 }
 func c(a int, b int) int {
