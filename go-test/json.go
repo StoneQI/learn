@@ -142,3 +142,22 @@ func (post *PostService)GetAllPost()  {
 	post.postDAO.FindPosts()
 	....
 } 
+
+
+
+type Service struct{
+	postDAO *PostDAO
+}
+
+func NewPostService(postDAO *PostDAO)  {
+	return &PostService{
+		postDAO: postDAO,
+	}	
+} 
+
+func (post *PostService)GetAllPost()  {
+	post.postDAO.FindPosts()
+	....
+} 
+
+
