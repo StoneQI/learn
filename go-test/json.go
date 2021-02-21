@@ -162,4 +162,8 @@ func (server *Server)SetPostService(postDAO *PostDAO)  {
 	server.postService = postDAO
 } 
 
+func (server *Server)GetPosts()  {
+	server.postService = postDAO
+} 
+
 
