@@ -100,8 +100,10 @@ type PostMysql struct{
     db *sql.DB
 }
 
-func NewPostMysql(){
-	...
+func NewPostMysql(db *sql.DB){
+	return &PostMysql{
+		db: db,
+	}
 }
 
 
