@@ -13,7 +13,7 @@ func main() {
 			"by_file": false,
 			"data_string": {
 				"basicInfo": {
-					"templateId": 5,
+					"PostId": 5,
 					"tag": "tag_traffic_last_number_limit",
 					"testForbid": "1",
 					"beginDate": "2021-03-16 00:00:00",
@@ -95,75 +95,84 @@ func main() {
 	aa, b := result["data_string"].(map[string]interface{})
 	print(aa, b)
 }
-
-type PostMysql struct{
-    db *sql.DB
-}
-
-func NewPostMysql(db *sql.DB){
-	return &PostMysql{
-		db: db,
+func setupServerPostHandler(t *testing.T) *gin.Engine {
+	
+	
+	
+	engine := gin.New()
+	//engine.Use(middleware.Logger())
+	engine.Use(gin.Recovery())
+	PostDaoMock,issql:= GetPostDao(t)
+	if !issql {
+		... mock 促使化
+		
 	}
+
+	server := NewServer()
+	// 唯一依赖
+	server.SetPostLogic(PostDaoMock)
+	// 创建组件
+	engine.POST("/Post", server.PostHandler)
+
+	return engine
 }
 
+func TestPostHandler(t *testing.T) {
 
-func (s *PostMysql) FindPostByID(ctx context.Context, id int) (*Post, error){
-	...
+	router := setupServerPostHandler(t)
+	Convey("Post Handler接口测试",t, func() {
+
+		req_content := &Post{
+
+		}
+
+		type Data_resp struct {
+			Post_id int `json:Post_id`
+		}
+
+		type resp_json struct {
+			Data  Data_resp `json:data`
+			Err_msg  string `json:err_msg`
+			Err_no   int `json:err_no`
+		}
+
+
+		req_content.Type = "AddPost"
+		Convey("AddPost 测试", func() {
+
+			Convey("AddPost 测试1", func() {
+
+				req_new := req_content
+				req_string, _ := json.Marshal(req_new)
+				req := httptest.NewRequest(http.MethodPost, "/AddPost", strings.NewReader(string(req_string)))
+				req.Header[global.HEADER_TRACEID] = []string{"testTrace"}
+				req.Header[global.HEADER_SPANID] = []string{"testSpan"}
+				req.Header[global.HEADER_USER] = []string{"testUser"}
+				req.Header.Set("Content-Type","application/json")
+
+				w := httptest.NewRecorder()
+
+				//fmt.Println(req.)
+
+				router.ServeHTTP(w, req)
+				resp := w.Result()
+
+				//if resp.StatusCode == http.StatusBadRequest {
+				//	fmt.Println(w.Body.String())
+				//}
+				resp_json1 := &resp_json{}
+				_ = json.Unmarshal(w.Body.Bytes(), resp_json1)
+				So(resp_json1.Data.Post_id,ShouldHaveSameTypeAs,1)
+				So(resp.StatusCode,ShouldEqual,http.StatusOK)
+			})
+
+		})
+
+
+
+
+	})
+
 }
-
-func (s *PostMysql)     FindPosts(ctx context.Context, filter PostFilter) ([]*Post, int, error){
-	s.db.Exec("...",...)
-}
-
-func (s *PostMysql)     CreatePost(ctx context.Context, post *Post) error{
-	...
-}
-
-func (s *PostMysql)     UpdatePost(ctx context.Context, id int, upd PostUpdate) (*Post, error){
-	...
-}
-
-func (s *PostMysql)     DeletePost(ctx context.Context, id int) error
-{
-	...
-}
-
-type PostService struct{
-	postDAO *PostDAO
-}
-
-func NewPostService(postDAO *PostDAO)  {
-	return &PostService{
-		postDAO: postDAO,
-	}	
-} 
-
-func (post *PostService)GetAllPost()  {
-	post.postDAO.FindPosts()
-	....
-} 
-
-
-
-type Server struct{
-	ln     net.Listener
-	server *http.Server
-
-	postService *PostService
-}
-
-func NewServer()  {
-	return &Server{
-		postDAO: postDAO,
-	}	
-} 
-
-func (server *Server)SetPostService(postDAO *PostDAO)  {
-	server.postService = postDAO
-} 
-
-func (server *Server)GetPosts(w http.ResponseWriter, r *http.Request)  {
-	...
-} 
 
 
